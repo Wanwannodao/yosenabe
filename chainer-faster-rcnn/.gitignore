@@ -9,7 +9,6 @@ docker/caffe
 *.png
 *.model
 *.ipynb_checkpoints
-*.ipynb
 *.c
 *.so
 *.o
