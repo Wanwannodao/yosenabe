@@ -42,8 +42,14 @@ namespace MLPlayer
 				//receive message 
 				Dictionary<System.Object, System.Object> msg = (Dictionary<System.Object,System.Object>)packer.Unpack (e.RawData);
 				var originalKey = new Dictionary<string, byte[]>();
+				var idKey = new Dictionary<string, byte[]> ();
 				foreach (byte[] key in msg.Keys) {
-					originalKey.Add (System.Text.Encoding.UTF8.GetString(key), key);
+					string k = System.Text.Encoding.UTF8.GetString (key);
+					if (k == "command") {
+						originalKey.Add (k, key);
+					} else {
+						idKey.Add (k, key);
+					}
 					Debug.Log ("key:" + System.Text.Encoding.UTF8.GetString(key) + " value:" + msg[key]);
 				}
 		
@@ -57,9 +63,11 @@ namespace MLPlayer
 
 			
 				// unique id of game object
-				//Debug.Log(System.Text.Encoding.UTF8.GetString((byte[])msg [originalKey ["obj_id"]]));
-				int obj_id = Int32.Parse(System.Text.Encoding.UTF8.GetString((byte[])msg [originalKey ["obj_id"]]));
-				SceneController.obj_q.Enqueue (obj_id);
+				foreach (string key in idKey.Keys) {
+					int obj_id = Convert.ToInt32 (msg [idKey[key]]);
+					//Debug.Log (obj_id);
+					SceneController.obj_q.Enqueue (obj_id);
+				}
 			
 
 				//agent.action.Set ((Dictionary<System.Object,System.Object>)packer.Unpack (e.RawData));
