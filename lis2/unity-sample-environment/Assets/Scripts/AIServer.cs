@@ -40,7 +40,37 @@ namespace MLPlayer
 			protected override void OnMessage (MessageEventArgs e)
 			{
 				//receive message 
-				agent.action.Set ((Dictionary<System.Object,System.Object>)packer.Unpack (e.RawData));
+				Dictionary<System.Object, System.Object> msg = (Dictionary<System.Object,System.Object>)packer.Unpack (e.RawData);
+				var originalKey = new Dictionary<string, byte[]>();
+				var idKey = new Dictionary<string, byte[]> ();
+				foreach (byte[] key in msg.Keys) {
+					string k = System.Text.Encoding.UTF8.GetString (key);
+					if (k == "command") {
+						originalKey.Add (k, key);
+					} else {
+						idKey.Add (k, key);
+					}
+					Debug.Log ("key:" + System.Text.Encoding.UTF8.GetString(key) + " value:" + msg[key]);
+				}
+		
+				// string:
+				string command = System.Text.Encoding.UTF8.GetString((byte[])msg [originalKey ["command"]]);
+				// int:
+				//int i = (int)action [originalKey ["command"]];
+				// float:
+				//float f = float.Parse (System.Text.Encoding.UTF8.GetString((byte[])action [originalKey ["value"]]));
+				agent.action.Set (command);
+
+			
+				// unique id of game object
+				foreach (string key in idKey.Keys) {
+					int obj_id = Convert.ToInt32 (msg [idKey[key]]);
+					//Debug.Log (obj_id);
+					SceneController.obj_q.Enqueue (obj_id);
+				}
+			
+
+				//agent.action.Set ((Dictionary<System.Object,System.Object>)packer.Unpack (e.RawData));
 				SceneController.received.Set ();
 				Debug.Log ("Rotate=" + agent.action.rotate + " Forword=" + agent.action.forward + " Jump=" + agent.action.jump);
 

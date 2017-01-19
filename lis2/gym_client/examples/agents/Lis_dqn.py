@@ -58,6 +58,6 @@ while episode_count <= total_episode:
         else:
             action, eps, q_now, obs_array = agent.agent_step(reward, observation)  
             agent.agent_step_update(reward, action, eps, q_now, obs_array)
-            observation, reward, end_episode, _ = env.step(action)  
+            observation, reward, end_episode, _  = env.step(action)  
 
 env.close()
