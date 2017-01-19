@@ -37,7 +37,13 @@ namespace MLPlayer
 		private float episodeStartTime = 0f;
 		public static ManualResetEvent received = new ManualResetEvent (false);
 
+		// queueu holding game object ids that will be deactivated
 		public static Queue<int> obj_q = new Queue<int>();
+		// for GUI
+		private float total_reward;
+		private string r_tex;
+		private GUIStyle style;
+		private GUIStyleState styleState;
 
 		void Start ()
 		{
@@ -46,6 +52,12 @@ namespace MLPlayer
 			firstLocation = agent.transform.position;
 			StartNewEpisode ();
 			lastSendTime = -cycleTimeStepSize;
+
+			style = new GUIStyle ();
+			styleState = new GUIStyleState ();
+			style.fontSize = 30;
+			styleState.textColor = Color.white;
+			styleState.background = Texture2D.blackTexture;
 		}
 
 		public void TimeOver ()
@@ -59,6 +71,9 @@ namespace MLPlayer
 			environment.OnReset ();
 			agent.transform.position = firstLocation;
 			agent.StartEpisode ();
+
+			total_reward = 0;
+			r_tex = "0";
 		}
 
 		public void FixedUpdate ()
@@ -91,10 +106,14 @@ namespace MLPlayer
 
 					agent.UpdateState ();
 
+					// update text area showing total rewards
+					total_reward += agent.state.reward;
+					r_tex = total_reward.ToString ();
+
 					// set positions of all game objects as state
 					Object[] objs = environment.getGameObjs();
 					int itemCnt = objs.Length;
-					Debug.Log (itemCnt);
+					//Debug.Log (itemCnt);
 					int j = 0;
 					agent.state.obj_pos = new float[itemCnt][];
 					agent.state.obj_angle = new float[itemCnt][];
@@ -132,5 +151,12 @@ namespace MLPlayer
 				EditorApplication.isPlaying = false;
 			}
 		}
+
+		void OnGUI () {
+			style.normal = styleState;
+			GUI.TextArea (new Rect (10, 10, 100, 50), r_tex, style);
+			//Debug.Log ("update reward");
+		}
+			
 	}
 }

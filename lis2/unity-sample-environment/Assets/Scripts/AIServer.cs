@@ -20,7 +20,6 @@ namespace MLPlayer
 		private Queue<byte[]> aiMessageQueue;
 		private Mutex mutAgent;
 		public Agent agent;
-		public Environment env;
 		private MsgPack.CompiledPacker packer;
 
 		public AIServer (Agent _agent)
