@@ -21,6 +21,11 @@ namespace MLPlayer {
 			endEpisode = false;
 			image = null;
 			depth = null;
+			obj_cnt = 0;
+			obj_pos = null;
+			obj_angle = null;
+			agent_pos = null;
+			agent_angle = null;
 		}
 	}
 }
