@@ -12,6 +12,9 @@ namespace MLPlayer {
 		public int obj_cnt;
 		public int[] obj_id;
 		public float[][] obj_pos; 
+		public float[][] obj_angle;
+		public float[] agent_pos;
+		public float[] agent_angle;
 
 		public void Clear() {
 			reward = 0;

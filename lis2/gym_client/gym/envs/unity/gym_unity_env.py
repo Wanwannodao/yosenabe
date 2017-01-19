@@ -34,9 +34,9 @@ class GymUnityEnv(gym.Env):
 
         # Unity Process
 
-        observation, reward, end_episode, obj_info = self.receive()
+        observation, reward, end_episode, info = self.receive()
 
-        return observation, reward, end_episode, {"obj_info":obj_info}
+        return observation, reward, end_episode, info
 
     def receive(self):
 
@@ -62,21 +62,29 @@ class GymUnityEnv(gym.Env):
             obj_cnt = state['obj_cnt']
             print(obj_cnt)
             obj_pos = np.empty([obj_cnt, 3], dtype=np.float32)
+            obj_angle = np.empty([obj_cnt, 3], dtype=np.float32)
             obj_id = np.empty([obj_cnt], dtype=np.int32)
             for i in xrange(obj_cnt):
                 obj_pos[i] = np.array( state['obj_pos'][i], dtype=np.float32).reshape(3) 
+                obj_angle[i] = np.array( state['obj_angle'][i], dtype=np.float32).reshape(3)
                 obj_id[i] = np.array( state['obj_id'][i], dtype=np.int32).reshape(1)
 
-            print obj_pos        
+            agent_pos = np.array( state['agent_pos'], dtype=np.float32).reshape(3)
+            agent_angle = np.array( state['agent_angle'], dtype=np.float32).reshape(3)
+            
+            print agent_pos
+            #print obj_pos        
             #print obj_id
+            
 
             observation = {"image": image, "depth": depth}
             reward = state['reward']
             end_episode = state['endEpisode']
 
-            obj_info = {"cnt":obj_cnt, "pos":obj_pos, "id":obj_id}
+            obj_info = {"cnt":obj_cnt, "pos":obj_pos, "angle":obj_angle, "id":obj_id}
+            agent_info = {"pos":agent_pos, "angle":agent_angle}
 
-            return observation, reward, end_episode, {"obj_info":obj_info}
+            return observation, reward, end_episode, {"obj_info":obj_info, "agent_info":agent_info}
             break
 
     def close(self):

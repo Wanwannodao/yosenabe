@@ -81,13 +81,29 @@ namespace MLPlayer
 					Debug.Log (itemCnt);
 					int j = 0;
 					agent.state.obj_pos = new float[itemCnt][];
+					agent.state.obj_angle = new float[itemCnt][];
 					agent.state.obj_id = new int[itemCnt];
+					agent.state.agent_pos = new float[3];
+					agent.state.agent_angle = new float[3];
+
 					foreach (GameObject obj in objs) {
 						agent.state.obj_pos [j] = new float[3];
+						agent.state.obj_angle [j] = new float[3];
 						agent.state.obj_pos [j] [0] = obj.transform.position.x;
 						agent.state.obj_pos [j] [1] = obj.transform.position.y;
 						agent.state.obj_pos [j] [2] = obj.transform.position.z;
+						agent.state.obj_angle [j] [0] = obj.transform.eulerAngles.x;
+						agent.state.obj_angle [j] [1] = obj.transform.eulerAngles.y;
+						agent.state.obj_angle [j] [2] = obj.transform.eulerAngles.z;
 						agent.state.obj_id [j] = obj.GetInstanceID ();
+
+						agent.state.agent_pos [0] = agent.transform.position.x;
+						agent.state.agent_pos [1] = agent.transform.position.y;
+						agent.state.agent_pos [2] = agent.transform.position.z;
+						agent.state.agent_angle [0] = agent.transform.eulerAngles.x;
+						agent.state.agent_angle [1] = agent.transform.eulerAngles.y;
+						agent.state.agent_angle [2] = agent.transform.eulerAngles.z;
+
 						j++;
 					}
 					agent.state.obj_cnt = itemCnt;
