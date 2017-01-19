@@ -41,5 +41,19 @@ namespace MLPlayer {
 				obj.transform.parent = transform;
 			}
 		}
+		// return a all active game objects
+		public Object[] getGameObjs() {
+			return UnityEngine.Object.FindObjectsOfType (typeof(GameObject));
+		}
+		// return a game object indicated by given id
+		public GameObject getGameObj(int id) {
+			foreach(GameObject obj 
+				in UnityEngine.Object.FindObjectsOfType(typeof(GameObject))) {
+				if (obj.GetInstanceID () == id) {
+					return obj;
+				}
+			}
+			return null;
+		} 
 	}
 }

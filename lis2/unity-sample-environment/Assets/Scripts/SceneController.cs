@@ -74,6 +74,24 @@ namespace MLPlayer
 					}
 					received.Reset ();
 					agent.UpdateState ();
+
+					// set positions of all game objects as state
+					Object[] objs = environment.getGameObjs();
+					int itemCnt = objs.Length;
+					Debug.Log (itemCnt);
+					int j = 0;
+					agent.state.obj_pos = new float[itemCnt][];
+					agent.state.obj_id = new int[itemCnt];
+					foreach (GameObject obj in objs) {
+						agent.state.obj_pos [j] = new float[3];
+						agent.state.obj_pos [j] [0] = obj.transform.position.x;
+						agent.state.obj_pos [j] [1] = obj.transform.position.y;
+						agent.state.obj_pos [j] [2] = obj.transform.position.z;
+						agent.state.obj_id [j] = obj.GetInstanceID ();
+						j++;
+					}
+					agent.state.obj_cnt = itemCnt;
+
 					server.PushAgentState (agent.state);
 					received.WaitOne ();
 					agent.ResetState ();
