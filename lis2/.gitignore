@@ -1,6 +1,7 @@
 checkpoints/
 *.ipynb_checkpoints
 *.caffemodel
+*.model
 *.pickle
 *.npy
 .DS_Store
