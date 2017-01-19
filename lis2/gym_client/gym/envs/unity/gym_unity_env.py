@@ -17,7 +17,7 @@ class GymUnityEnv(gym.Env):
         websocket.enableTrace(True)
     	self.ws = websocket.create_connection("ws://localhost:4649/CommunicationGym")
         self.action_space = spaces.Discrete(3)
-        self.depth_image_dim = 32 * 32
+        self.depth_image_dim = 224 * 224
         self.depth_image_count = 1
         self.observation, _, _, _ = self.receive()
 
@@ -67,7 +67,7 @@ class GymUnityEnv(gym.Env):
             # game object info.
             # obj_pos[0]:x, obj_pos[1]:y, obj_pos[2]:z
             obj_cnt = state['obj_cnt']
-            print(obj_cnt)
+            #print(obj_cnt)
             obj_pos = np.empty([obj_cnt, 3], dtype=np.float32)
             obj_angle = np.empty([obj_cnt, 3], dtype=np.float32)
             obj_id = np.empty([obj_cnt], dtype=np.int32)
@@ -79,7 +79,7 @@ class GymUnityEnv(gym.Env):
             agent_pos = np.array( state['agent_pos'], dtype=np.float32).reshape(3)
             agent_angle = np.array( state['agent_angle'], dtype=np.float32).reshape(3)
             
-            print agent_pos
+            #print agent_pos
             #print obj_pos        
             #print obj_id
             
