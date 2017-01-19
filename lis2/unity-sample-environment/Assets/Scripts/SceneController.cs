@@ -41,6 +41,7 @@ namespace MLPlayer
 		public static Queue<int> obj_q = new Queue<int>();
 		// for GUI
 		private float total_reward;
+		private int count;
 		private string r_tex;
 		private GUIStyle style;
 		private GUIStyleState styleState;
@@ -73,6 +74,7 @@ namespace MLPlayer
 			agent.StartEpisode ();
 
 			total_reward = 0;
+			count = 0;
 			r_tex = "0";
 		}
 
@@ -99,6 +101,7 @@ namespace MLPlayer
 
 						if (environment.deactivateGameObj(id)) {
 							Debug.Log ("deactiveate:" + id);
+							count++;
 						} else {
 							Debug.Log ("deactivation failed");
 						}
@@ -108,7 +111,8 @@ namespace MLPlayer
 
 					// update text area showing total rewards
 					total_reward += agent.state.reward;
-					r_tex = total_reward.ToString ();
+					setText (total_reward.ToString (), count.ToString ());
+
 
 					// set positions of all game objects as state
 					Object[] objs = environment.getGameObjs();
@@ -156,6 +160,10 @@ namespace MLPlayer
 			style.normal = styleState;
 			GUI.TextArea (new Rect (10, 10, 100, 50), r_tex, style);
 			//Debug.Log ("update reward");
+		}
+
+		void setText(string total, string count) {
+			r_tex = "total reward: " + total + "\n" + "count: " + count;
 		}
 			
 	}
