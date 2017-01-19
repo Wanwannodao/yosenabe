@@ -37,6 +37,8 @@ namespace MLPlayer
 		private float episodeStartTime = 0f;
 		public static ManualResetEvent received = new ManualResetEvent (false);
 
+		public static Queue<int> obj_q = new Queue<int>();
+
 		void Start ()
 		{
 			server = new AIServer (agent);
@@ -73,6 +75,20 @@ namespace MLPlayer
 						StartNewEpisode ();
 					}
 					received.Reset ();
+
+
+					// deactivate observed objects
+					while (0 < obj_q.Count) {
+						int id = obj_q.Dequeue ();
+						//Object[] gobj = environment.getGameObjs ();
+
+						if (environment.deactivateGameObj(id)) {
+							Debug.Log ("deactiveate:" + id);
+						} else {
+							Debug.Log ("deactivation failed");
+						}
+					}
+
 					agent.UpdateState ();
 
 					// set positions of all game objects as state

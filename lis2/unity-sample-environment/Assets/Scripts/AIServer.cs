@@ -20,6 +20,7 @@ namespace MLPlayer
 		private Queue<byte[]> aiMessageQueue;
 		private Mutex mutAgent;
 		public Agent agent;
+		public Environment env;
 		private MsgPack.CompiledPacker packer;
 
 		public AIServer (Agent _agent)
@@ -40,7 +41,29 @@ namespace MLPlayer
 			protected override void OnMessage (MessageEventArgs e)
 			{
 				//receive message 
-				agent.action.Set ((Dictionary<System.Object,System.Object>)packer.Unpack (e.RawData));
+				Dictionary<System.Object, System.Object> msg = (Dictionary<System.Object,System.Object>)packer.Unpack (e.RawData);
+				var originalKey = new Dictionary<string, byte[]>();
+				foreach (byte[] key in msg.Keys) {
+					originalKey.Add (System.Text.Encoding.UTF8.GetString(key), key);
+					Debug.Log ("key:" + System.Text.Encoding.UTF8.GetString(key) + " value:" + msg[key]);
+				}
+		
+				// string:
+				string command = System.Text.Encoding.UTF8.GetString((byte[])msg [originalKey ["command"]]);
+				// int:
+				//int i = (int)action [originalKey ["command"]];
+				// float:
+				//float f = float.Parse (System.Text.Encoding.UTF8.GetString((byte[])action [originalKey ["value"]]));
+				agent.action.Set (command);
+
+			
+				// unique id of game object
+				//Debug.Log(System.Text.Encoding.UTF8.GetString((byte[])msg [originalKey ["obj_id"]]));
+				int obj_id = Int32.Parse(System.Text.Encoding.UTF8.GetString((byte[])msg [originalKey ["obj_id"]]));
+				SceneController.obj_q.Enqueue (obj_id);
+			
+
+				//agent.action.Set ((Dictionary<System.Object,System.Object>)packer.Unpack (e.RawData));
 				SceneController.received.Set ();
 				Debug.Log ("Rotate=" + agent.action.rotate + " Forword=" + agent.action.forward + " Jump=" + agent.action.jump);
 

@@ -27,9 +27,10 @@ class GymUnityEnv(gym.Env):
 
 
 
-    def step(self, action):
+    def step(self, action, id=1000):
 
-        actiondata = msgpack.packb({"command": str(action)})
+        actiondata = msgpack.packb({"command": str(action),
+                                    "obj_id": str(id) })
         self.ws.send(actiondata)
 
         # Unity Process

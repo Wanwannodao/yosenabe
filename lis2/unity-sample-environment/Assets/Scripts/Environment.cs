@@ -55,5 +55,15 @@ namespace MLPlayer {
 			}
 			return null;
 		} 
+		// deactivate the game object indicated by given id
+		public bool deactivateGameObj(int id) {
+			GameObject obj = getGameObj (id);
+			if (obj != null) { 
+				obj.SetActive (false);
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 }
