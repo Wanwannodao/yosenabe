@@ -17,7 +17,7 @@ class GymUnityEnv(gym.Env):
         websocket.enableTrace(True)
     	self.ws = websocket.create_connection("ws://localhost:4649/CommunicationGym")
         self.action_space = spaces.Discrete(3)
-        self.depth_image_dim = 224 * 224
+        # self.depth_image_dim = 224 * 224
         self.depth_image_count = 1
         self.observation, _, _, _ = self.receive()
 
@@ -62,7 +62,7 @@ class GymUnityEnv(gym.Env):
             depth = []
             for i in xrange(self.depth_image_count):
                 d = (Image.open(io.BytesIO(bytearray(state['depth'][i]))))
-                depth.append(np.array(ImageOps.grayscale(d)).reshape(self.depth_image_dim))
+                depth.append(d)
 
             # game object info.
             # obj_pos[0]:x, obj_pos[1]:y, obj_pos[2]:z
