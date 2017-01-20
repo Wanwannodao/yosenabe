@@ -5,8 +5,10 @@ namespace MLPlayer {
 	public class Environment : MonoBehaviour {
 
 		int itemCount = 10;
+		int chairCount = 10;
 		float areaSize = 10;
 		[SerializeField] List<GameObject> itemPrefabs;
+		[SerializeField] List<GameObject> chairPrefabs;
 	
 
 		// Use this for initialization
@@ -24,20 +26,40 @@ namespace MLPlayer {
 				Destroy (i.gameObject);
 			}
 			for (int i=0; i<itemCount; i++) {	
+				int itemId = UnityEngine.Random.Range(0, itemPrefabs.Count);
+
 				Vector3 pos = new Vector3 (
 					UnityEngine.Random.Range (-areaSize, areaSize),
-					1,
+					itemPrefabs[itemId].transform.position.y,
 					UnityEngine.Random.Range (-areaSize, areaSize));
-//				Quaternion q = Quaternion.Euler (
-//					UnityEngine.Random.Range (0f, 360f),
-//					UnityEngine.Random.Range (0f, 360f),
-//					UnityEngine.Random.Range (0f, 360f)
-//					);
+				Quaternion q = Quaternion.Euler (
+					270,
+					UnityEngine.Random.Range (0f, 360f),
+					0
+				);
 
 				pos += transform.position;
-				int itemId = UnityEngine.Random.Range(0, itemPrefabs.Count);
+
 				GameObject obj = (GameObject)GameObject.Instantiate 
-					(itemPrefabs[itemId], pos, Quaternion.identity);
+					(itemPrefabs[itemId], pos, q);
+				obj.transform.parent = transform;
+			}
+
+			for (int i=0; i<chairCount; i++) {	
+				int itemId = UnityEngine.Random.Range(0, chairPrefabs.Count);
+				Vector3 pos = new Vector3 (
+					UnityEngine.Random.Range (-areaSize, areaSize),
+					chairPrefabs[itemId].transform.position.y,
+					UnityEngine.Random.Range (-areaSize, areaSize));
+				Quaternion q = Quaternion.Euler (
+					chairPrefabs[itemId].transform.rotation.x,
+					UnityEngine.Random.Range (0f, 360f),
+					0
+					);
+
+				pos += transform.position;
+				GameObject obj = (GameObject)GameObject.Instantiate 
+					(chairPrefabs[itemId], pos, q);
 				obj.transform.parent = transform;
 			}
 		}
