@@ -127,7 +127,7 @@ namespace MLPlayer {
 		// deactivate the game object indicated by given id
 		public bool deactivateGameObj(int id) {
 			GameObject obj = getGameObj (id);
-			if (obj != null) { 
+			if (obj != null && obj.tag != "light") { 
 				obj.SetActive (false);
 				return true;
 			} else {
