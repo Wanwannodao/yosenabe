@@ -163,7 +163,8 @@ namespace MLPlayer
 		}
 
 		void setText(string total, string count) {
-			r_tex = "total reward: " + total + "\n" + "count: " + count;
+			//r_tex = "total reward: " + total + "\n" + "count: " + count;
+			r_tex = "count: " + count;
 		}
 			
 	}
