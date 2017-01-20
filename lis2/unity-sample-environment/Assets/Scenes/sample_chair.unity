@@ -776,12 +776,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCount: 10
-  chairCount: 15
-  areaSize: 15
+  chairCount: 20
+  wallCount: 1
+  areaSize: 12
   itemPrefabs:
   - {fileID: 170288, guid: 3569e49e7e250471d9a26f264dd0340e, type: 2}
   - {fileID: 169140, guid: 8a209cce4daaf4d418a2ebeb399f6bff, type: 2}
-  - {fileID: 129052, guid: 8a50bccba005c43eaabc30e849adf4f1, type: 2}
   chairPrefabs:
   - {fileID: 103138, guid: 808271cfad2a644f7ab764e64bab4577, type: 2}
   - {fileID: 160344, guid: 22ba430cdaf9346f486cf485ef826617, type: 2}
+  wallPrefabs:
+  - {fileID: 129052, guid: 8a50bccba005c43eaabc30e849adf4f1, type: 2}
