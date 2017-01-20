@@ -403,6 +403,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 644654426}
   m_RootOrder: 1
+--- !u!4 &810570540 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 493380, guid: 22ba430cdaf9346f486cf485ef826617, type: 2}
+  m_PrefabInternal: {fileID: 2031231429}
 --- !u!4 &836272364 stripped
 Transform:
   m_PrefabParentObject: {fileID: 409874, guid: 8a209cce4daaf4d418a2ebeb399f6bff, type: 2}
@@ -588,6 +592,56 @@ Transform:
   - {fileID: 1215490702}
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!1001 &2031231429
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2101396358}
+    m_Modifications:
+    - target: {fileID: 493380, guid: 22ba430cdaf9346f486cf485ef826617, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 493380, guid: 22ba430cdaf9346f486cf485ef826617, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.0009877802
+      objectReference: {fileID: 0}
+    - target: {fileID: 493380, guid: 22ba430cdaf9346f486cf485ef826617, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 493380, guid: 22ba430cdaf9346f486cf485ef826617, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493380, guid: 22ba430cdaf9346f486cf485ef826617, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493380, guid: 22ba430cdaf9346f486cf485ef826617, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493380, guid: 22ba430cdaf9346f486cf485ef826617, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 493380, guid: 22ba430cdaf9346f486cf485ef826617, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 160344, guid: 22ba430cdaf9346f486cf485ef826617, type: 2}
+      propertyPath: m_Name
+      value: lis-chair2
+      objectReference: {fileID: 0}
+    - target: {fileID: 160344, guid: 22ba430cdaf9346f486cf485ef826617, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 22ba430cdaf9346f486cf485ef826617, type: 2}
+  m_IsPrefabParent: 0
 --- !u!114 &2078493469 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11469880, guid: 7807d5793a14e43459d66a7063f42614,
@@ -623,6 +677,7 @@ Transform:
   - {fileID: 1410163798}
   - {fileID: 836272364}
   - {fileID: 465022140}
+  - {fileID: 810570540}
   m_Father: {fileID: 644654426}
   m_RootOrder: 0
 --- !u!114 &2101396359
@@ -636,8 +691,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe254708eee948c1b119e381f0ae635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemCount: 15
+  chairCount: 15
+  areaSize: 10
   itemPrefabs:
   - {fileID: 170288, guid: 3569e49e7e250471d9a26f264dd0340e, type: 2}
   - {fileID: 169140, guid: 8a209cce4daaf4d418a2ebeb399f6bff, type: 2}
   chairPrefabs:
   - {fileID: 103138, guid: 808271cfad2a644f7ab764e64bab4577, type: 2}
+  - {fileID: 160344, guid: 22ba430cdaf9346f486cf485ef826617, type: 2}

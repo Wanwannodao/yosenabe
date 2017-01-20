@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace MLPlayer {
 	public class Environment : MonoBehaviour {
 
-		int itemCount = 10;
-		int chairCount = 10;
-		float areaSize = 10;
+		[SerializeField] int itemCount;
+		[SerializeField] int chairCount;
+		[SerializeField] float areaSize;
 		[SerializeField] List<GameObject> itemPrefabs;
 		[SerializeField] List<GameObject> chairPrefabs;
 	
