@@ -6,9 +6,12 @@ namespace MLPlayer {
 
 		[SerializeField] int itemCount;
 		[SerializeField] int chairCount;
+		[SerializeField] int wallCount;
 		[SerializeField] float areaSize;
 		[SerializeField] List<GameObject> itemPrefabs;
 		[SerializeField] List<GameObject> chairPrefabs;
+		[SerializeField] List<GameObject> wallPrefabs;
+
 	
 
 		// Use this for initialization
@@ -25,6 +28,33 @@ namespace MLPlayer {
 			foreach(Transform i in transform) {
 				Destroy (i.gameObject);
 			}
+
+			for (int i=0; i<wallCount; i++) {	
+				while (true) {
+					int itemId = UnityEngine.Random.Range (0, wallPrefabs.Count);
+					Vector3 pos = new Vector3 (
+						UnityEngine.Random.Range (-areaSize, areaSize),
+						wallPrefabs [itemId].transform.position.y,
+						UnityEngine.Random.Range (-areaSize, areaSize));
+					Quaternion q = Quaternion.Euler (
+						wallPrefabs [itemId].transform.rotation.x,
+						UnityEngine.Random.Range (0f, 360f),
+						0
+					);
+
+					pos += transform.position;
+					GameObject obj = (GameObject)GameObject.Instantiate 
+						(wallPrefabs [itemId], pos, q);
+
+					if (!detectIntersecton (obj)) {
+						obj.transform.parent = transform;
+						break;
+					} else {
+						Destroy (obj);
+					}
+				}
+			}
+
 			for (int i=0; i<itemCount; i++) {	
 				while (true) {
 					int itemId = UnityEngine.Random.Range (0, itemPrefabs.Count);
@@ -34,7 +64,7 @@ namespace MLPlayer {
 						             itemPrefabs [itemId].transform.position.y,
 						             UnityEngine.Random.Range (-areaSize, areaSize));
 					Quaternion q = Quaternion.Euler (
-						              270,
+								270,
 						              UnityEngine.Random.Range (0f, 360f),
 						              0
 					              );
@@ -78,6 +108,7 @@ namespace MLPlayer {
 					}
 				}
 			}
+
 		}
 		// return a all active game objects
 		public Object[] getGameObjs() {

@@ -12,6 +12,8 @@ GameObject:
   - 23: {fileID: 2335836}
   - 95: {fileID: 9576216}
   - 65: {fileID: 6550368}
+  - 114: {fileID: 11477516}
+  - 54: {fileID: 5446122}
   m_Layer: 0
   m_Name: lis-chair2-prefasb
   m_TagString: Untagged
@@ -64,6 +66,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160344}
   m_Mesh: {fileID: 4300000, guid: 1f5a33572480886499d2dca12496c3bb, type: 3}
+--- !u!54 &5446122
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160344}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
 --- !u!65 &6550368
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -93,6 +110,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11477516
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00c1520b33e6540ea9fe55003d76626f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reward: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
