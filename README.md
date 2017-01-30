@@ -18,7 +18,7 @@ cd ..
 
 ### 2\. Open Unity scene and run
 
-Open unity-sample-environment with Unity and load Scenes/sample_chair.
+Open lis2/unity-sample-environment with Unity and load Scenes/sample_chair.
 
 
 ### 3\. Run Lis_dqn_ImageInput.ipynb using jupyter notebook
